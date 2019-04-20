@@ -25,9 +25,8 @@ Aplikacja powinna umożliwiać zapisywanie projektu w celu późniejszej edycji.
 
 Aplikacja powinna umożliwiać modyfikowanie (edycję) istniejących animacji w wcześniej zapisanym projekcie.
 
-Prezentację funkcjonalności aplikacji - szybka demonstracja działania programu, pokazanie działania pełnej funkcjonalności oraz skupienie się na najciekawszych elementach UI/UX.
+Prezentację funkcjonalności aplikacji
 Prezentacja instrukcji użytkownika.
-Prezentacja implementacji - taki wspólny ‘code review’. Zależy mi na tym, aby każdy zespół powiedział co mu sprawiło największe problemy, oraz co uważają, że im wyszło najlepiej.
-
+Prezentacja implementacji 
 
 
