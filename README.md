@@ -69,3 +69,31 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+=======
+# Wymagania niefunkcjonalne do projektu ‘Aplikacja do tworzenia animacji SVG’:
+
+React (aplikacja internetowa typu ‘Single page’ w JavaScript + dowolnie wybrany backend, o ile będzie potrzebny)
+
+Aplikacja powinna być napisana zgodnie z architekturą Single Page application.
+
+Aplikacja powinna umożliwiać użytkownikowi wczytanie obrazu SVG.
+
+Aplikacja powinna generować ‘statyczną’ stronę internetową, zawierającą niezbędne biblioteki JavaScript oraz osadzać w niej sgrany obraz SVG uzupełniony o zdefiniowane przez użytkownika animacje.
+
+Aplikacja powinna umożliwiać określanie linii czasu.
+
+Aplikacja powinna umożliwiać co najmniej: definiowanie translacji, obrotów, zmiany atrybutów CSS.
+
+Aplikacja powinna udostępniać w formie graficznej ‘drzewo’ reprezentujące strukturę obiektów SVG.
+
+Aplikacja powinna udostępniać podgląd statycznego SVG (idealnie powinna umożliwiać uruchomienie animacji).
+
+Aplikacja powinna być wygodna i intuicyjna w użyciu.
+
+Aplikacja powinna umożliwiać zapisywanie projektu w celu późniejszej edycji.
+
+Aplikacja powinna umożliwiać modyfikowanie (edycję) istniejących animacji w wcześniej zapisanym projekcie.
+
+Prezentację funkcjonalności aplikacji
+Prezentacja instrukcji użytkownika.
+Prezentacja implementacji 
