@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 class SvgView extends Component {
 
+
   render() {
     return (
         //to jest NIEBEZPIECZE, atak XSS

@@ -6,7 +6,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import parseSVG from "../logic/SvgParser.js"
  
 class SvgCodeLoader extends Component {
 
@@ -33,8 +32,14 @@ class SvgCodeLoader extends Component {
         this.setState({svgCode: event.target.value});
     };
 
-    render() {
+    handleSubmit = (event) => {
+        this.setState({svgCode: event.target.value});
         var loadSvgFunction = this.props.loadSvg;
+        loadSvgFunction(this.state.svgCode)
+        this.setState({open: false});
+    };
+
+    render() {
         return (
             <div>
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
@@ -64,9 +69,9 @@ class SvgCodeLoader extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             Zamknij
                         </Button>
-                        <Button onClick={() => loadSvgFunction(this.state.svgCode = sessionStorage.getItem("xml"))} color="primary">
-                            Prześlij
-                        </Button>
+                        <Button onClick={this.handleSubmit} color="primary">
+	                            Prześlij
+	                    </Button>
                     </DialogActions>
                 </Dialog>
             </div>
