@@ -19,6 +19,7 @@ class App extends Component {
             svgCode: code});
     };
 
+
   render() {
     return (
       <div className="App">

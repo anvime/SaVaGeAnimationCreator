@@ -6,7 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import parseSVG from "../logic/SvgParser.js"
+ 
 class SvgCodeLoader extends Component {
 
     constructor(props) {
@@ -51,7 +52,7 @@ class SvgCodeLoader extends Component {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="name"
+                            id="xml"
                             multiline
                             rows="20"
                             onChange={this.handleChange}
@@ -63,7 +64,7 @@ class SvgCodeLoader extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             Zamknij
                         </Button>
-                        <Button onClick={() => loadSvgFunction(this.state.svgCode)} color="primary">
+                        <Button onClick={() => loadSvgFunction(this.state.svgCode = sessionStorage.getItem("xml"))} color="primary">
                             Prześlij
                         </Button>
                     </DialogActions>
