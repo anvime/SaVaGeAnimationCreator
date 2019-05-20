@@ -6,7 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
- 
+const writeFileP = require("write-file-p");
+
 class SvgCodeLoader extends Component {
 
     constructor(props) {
@@ -15,6 +16,7 @@ class SvgCodeLoader extends Component {
             open: false,
             svgCode: <div></div>
         };
+
     }
 
     handleClickOpen = () => {
@@ -22,9 +24,6 @@ class SvgCodeLoader extends Component {
     };
 
     handleClose = () => {
-        this.setState({open: false});
-    };
-    handleSend = () => {
         this.setState({open: false});
     };
 
@@ -39,12 +38,53 @@ class SvgCodeLoader extends Component {
         this.setState({open: false});
     };
 
+    setSvgFromFile = (svg) => {
+        this.setState({svgCode: svg});
+            var loadSvgFunction = this.props.loadSvg;
+            loadSvgFunction(this.state.svgCode)
+
+    };
+
+    loadSvgFromFile = () => {
+        var fileToLoad = document.getElementById("fileToLoad").files[0];
+        const reader = new FileReader()
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result)
+            reader.onerror = error => reject(error)
+            reader.readAsText(fileToLoad)
+        })
+        };
+
+     placeFileContent = () =>{
+	    this.loadSvgFromFile().then(content => {
+  	    this.setState({svgCode: content});
+            var loadSvgFunction = this.props.loadSvg;
+            loadSvgFunction(this.state.svgCode)
+    }).catch(error => console.log(error))
+    }
+
+    handleSave = () => {
+       let data = "Learning how to write in a file."
+       writeFileP(`${__dirname}/foo/bar/output.txt`, "Hello World", (err, data) => {
+    console.log(err || data);
+});
+    }
+
     render() {
         return (
             <div>
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    Prześlij plik SVG
+                    Prześlij kod pliku SVG
                 </Button>
+                <div className="upload-btn-wrapper">
+                    <Button variant="outlined" color="primary" >
+                        Prześlij  plik SVG
+                    </Button>
+                <input type="file" id="fileToLoad" onInput={this.placeFileContent}/>
+                <Button variant="outlined" color="primary" >
+                    Zapisz obecny plik(nie działa)
+                </Button>
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
