@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 const writeFileP = require("write-file-p");
 
+
 class SvgCodeLoader extends Component {
 
     constructor(props) {
@@ -61,14 +62,22 @@ class SvgCodeLoader extends Component {
             var loadSvgFunction = this.props.loadSvg;
             loadSvgFunction(this.state.svgCode)
     }).catch(error => console.log(error))
-    }
+    };
+
 
     handleSave = () => {
-       let data = "Learning how to write in a file."
-       writeFileP(`${__dirname}/foo/bar/output.txt`, "Hello World", (err, data) => {
-    console.log(err || data);
-});
-    }
+        var text = (this.state.svgCode);
+        var filename = "svg.xml";
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    };
+
+
 
     render() {
         return (
@@ -81,7 +90,7 @@ class SvgCodeLoader extends Component {
                         Prześlij  plik SVG
                     </Button>
                 <input type="file" id="fileToLoad" onInput={this.placeFileContent}/>
-                <Button variant="outlined" color="primary" >
+                <Button variant="outlined" color="primary" onClick={this.handleSave} >
                     Zapisz obecny plik(nie działa)
                 </Button>
                 </div>
