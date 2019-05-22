@@ -1,0 +1,39 @@
+.navItem {
+
+}
+.navItem:hover {background: #e17d60}
+
+.navItem:active {background: #e17d60}
+
+.navItemSelected {
+    background: #e17d60;
+}
+
+.deleteButton{
+
+}
+
+#categoryButton{
+
+}
+#categoryButton:active {background: #e8a87c}
+#categoryButton:focus {background: 	#e8a87c}
+
+.navTitle{
+
+}
+
+.navContent{
+
+}
+
+#scNav {
+  position:relative;
+  background: lavenderblush;
+  overflow:hidden;
+  min-height: calc(100vh);
+}
+
+#selectCategory {
+    background:#c7aaaa;
+}
