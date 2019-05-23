@@ -8,37 +8,47 @@ class Navigation extends Component {
         super(props);
         this.state = {
             open: false,
-            navIndex: "actors",
+            navIndex: this.props.navIndex,
             actorsList: ["Actor1", "Actor2", "Actor3"],
             operationsList: ["Rotate1", "Rotate2", "Move1"],
-            selectedItemIndex: 0, //indeks odpowiad actorsList lub operationsList w zależności od wartości navIndex
+            scenarioList: ["Scenario1"],
+            selectedItemIndex: 0, //indeks odpowiada actorsList lub operationsList lub scenarioList w zależności od wartości navIndex
             actorCount: 3,
             operationsCount: 3,
+            scenarioCount: 1,
         };
     }
+
     selectActors = () =>{
         this.setState({navIndex: "actors"});
+        this.props.handleNavIndexChange("actors");
         this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
     }
 
     selectOperations = () =>{
         this.setState({navIndex: "operations"});
+        this.props.handleNavIndexChange("operations");
         this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
     }
 
     selectScenario = () =>{
         this.setState({navIndex: "scenario"});
+        this.props.handleNavIndexChange("scenario");
         this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
     }
 
     handleActorSelect = (idx) => {
         this.setState({selectedItemIndex: idx});
+        this.props.updateSelectedItemIndex(idx);
     }
 
     addActor = () => {
         this.setState({
             actorsList: this.state.actorsList.concat("Actor" + (this.state.actorCount + 1).toString())
-        });
+        }, ()=> this.props.updateActorsList(this.state.actorsList));
         var tempCount = this.state.actorCount;
         this.setState({actorCount: tempCount + 1});
     }
@@ -47,14 +57,17 @@ class Navigation extends Component {
         var actorsList = [...this.state.actorsList];
         actorsList.splice(idx, 1);
 
-        this.setState({actorsList: actorsList});
+        this.setState({actorsList: actorsList},
+            ()=> this.props.updateActorsList(this.state.actorsList));
         this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
     }
 
     addOperation = () => {
         this.setState({
             operationsList: this.state.operationsList.concat("Operation" + (this.state.operationsCount + 1).toString())
-        });
+        }, ()=> this.props.updateOperationsList(this.state.operationsList));
+
         var tempCount = this.state.operationsCount;
         this.setState({operationsCount: tempCount + 1});
     }
@@ -63,17 +76,42 @@ class Navigation extends Component {
         var operationsList = [...this.state.operationsList];
         operationsList.splice(idx, 1);
 
-        this.setState({operationsList: operationsList});
+        this.setState({operationsList: operationsList},
+            ()=> this.props.updateOperationsList(this.state.operationsList));
+
         this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
+    }
+
+    addScenario = () => {
+        this.setState({
+            scenarioList: this.state.scenarioList.concat("Scenario" + (this.state.scenarioCount + 1).toString())
+        }, ()=> this.props.updateScenarioList(this.state.scenarioList));
+
+        var tempCount = this.state.scenarioCount;
+        this.setState({scenarioCount: tempCount + 1});
+    }
+
+    deleteScenario = (idx) => {
+        var scenarioList = [...this.state.scenarioList];
+        scenarioList.splice(idx, 1);
+
+        this.setState({scenarioList: scenarioList},
+            ()=> this.props.updateScenarioList(this.state.scenarioList));
+
+        this.setState({selectedItemIndex: 0});
+        this.props.updateSelectedItemIndex(0);
     }
 
     render() {
         let navPage;
         let actorsListPage;
         let tricksListPage;
+        let scenarioListPage;
 
         let actorsHelperPage = [];
         let tricksHelperPage = [];
+        let scenarioHelperPage = [];
 
         if (this.state.actorsList.length == 0){
             actorsListPage = <div></div>
@@ -101,6 +139,19 @@ class Navigation extends Component {
                 </div>
         }
 
+        if (this.state.scenarioList.length == 0){
+            scenarioListPage = <div></div>
+        } else {
+            let k
+            for (k=0;k<this.state.scenarioList.length;k++){
+                scenarioHelperPage.push(<NavigationItem index={k}  selectedItemIndex={this.state.selectedItemIndex} clickFunction={this.handleActorSelect} name={this.state.scenarioList[k]} deleteFunction={this.deleteScenario}/>)
+            }
+            scenarioListPage =
+                <div>
+                    {scenarioHelperPage}
+                </div>
+        }
+
 
         if(this.state.navIndex == 'actors'){
             navPage =
@@ -124,6 +175,10 @@ class Navigation extends Component {
             navPage =
                 <div className="navTitle">
                     <div>Scenariusz</div>
+                    <Button onClick={this.addScenario}>Dodaj</Button>
+                    <div className="navContent">
+                        {scenarioListPage}
+                    </div>
                 </div>
         }
 

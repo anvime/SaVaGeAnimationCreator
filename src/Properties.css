@@ -1,0 +1,36 @@
+#parametersSetting {
+  background: #f0aeae;
+  min-height: calc(100vh);
+}
+
+#parametersContent {
+  background: #fee7ab;
+  min-height: calc(100vh);
+  margin-top: 15px;
+}
+
+#scenarioContent {
+  background: #fee7ab;
+  min-height: calc(100vh);
+  margin-top: -10px;
+}
+
+#actorTypeDropdown {
+    width: 80%;
+}
+
+#sliders {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#label{
+  margin-top: 25px;
+}
+
+#colorPicker {
+  margin: auto;
+  margin-left: 55px;
+  margin-top: 10px;
+}
