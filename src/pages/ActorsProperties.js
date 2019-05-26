@@ -14,48 +14,48 @@ class ActorsProperties extends Component {
     constructor(props){
         super(props);
         this.state = {
-            actorType: "circle",
-            circleDiameter: 20,
-            squareSize: 20,
-            positionX: 50,
-            positionY: 50,
-            color: '#fff'
+            actorType: this.props.parameters[0],
+            circleDiameter: this.props.parameters[1],
+            squareSize: this.props.parameters[2],
+            positionX: this.props.parameters[3],
+            positionY: this.props.parameters[4],
+            color: this.props.parameters[5]
         };
     }
 
     handleActorTypeChange =  event => {
-        this.setState({ actorType: event.target.value });
+        this.props.handleActorTypeChange(event.target.value);
     };
 
     handleDiameterChange = (event, circleDiameter) => {
-    this.setState({ circleDiameter });
+        this.props.handleActorCircleDiameterChange(circleDiameter);
   };
 
     handleSquareSizeChange = (event, squareSize) => {
-    this.setState({ squareSize });
+        this.props.handleActorSquareSizeChange(squareSize);
   };
 
     handlePositionXChange = (event, positionX) => {
-    this.setState({ positionX });
+        this.props.handleActorXChange(positionX);
   };
 
     handlePositionYChange = (event, positionY) => {
-    this.setState({ positionY });
+        this.props.handleActorYChange(positionY);
   };
 
     handleColorChange = (color) => {
-    this.setState({ color: color.hex });
+        this.props.handleActorColorChange(color.hex);
   };
 
     render() {
     let typeOfSizePage;
 
-    if(this.state.actorType == "circle"){
+    if(this.props.parameters[0] == "circle"){
         typeOfSizePage = <div>
-            <Typography id="label"><h1>Promień koła: {this.state.circleDiameter}</h1></Typography>
+            <Typography id="label"><h1>Promień koła: {this.props.parameters[1]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.circleDiameter}
+            value={this.props.parameters[1]}
             min={1}
             max={100}
             step={1}
@@ -64,10 +64,10 @@ class ActorsProperties extends Component {
         </div>
     } else {
        typeOfSizePage = <div>
-            <Typography id="label"><h1>Rozmiar kwadratu: {this.state.squareSize}</h1></Typography>
+            <Typography id="label"><h1>Rozmiar kwadratu: {this.props.parameters[2]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.squareSize}
+            value={this.props.parameters[2]}
             min={1}
             max={100}
             step={1}
@@ -84,7 +84,7 @@ class ActorsProperties extends Component {
               <FormControl id="actorTypeDropdown">
           <InputLabel htmlFor="age-simple">Rodzaj aktora</InputLabel>
           <Select
-            value={this.state.actorType}
+            value={this.props.parameters[0]}
             onChange={this.handleActorTypeChange}
           >
             <MenuItem value={"circle"}>koło</MenuItem>
@@ -98,10 +98,10 @@ class ActorsProperties extends Component {
 
       <h1 id="label">Pozycja:</h1>
       <div>
-            <Typography id="label"><h1>X: {this.state.positionX}</h1></Typography>
+            <Typography id="label"><h1>X: {this.props.parameters[3]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.positionX}
+            value={this.props.parameters[3]}
             min={1}
             max={100}
             step={1}
@@ -109,10 +109,10 @@ class ActorsProperties extends Component {
             />
         </div>
         <div>
-            <Typography id="label"><h1>Y: {this.state.positionY}</h1></Typography>
+            <Typography id="label"><h1>Y: {this.props.parameters[4]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.positionY}
+            value={this.props.parameters[4]}
             min={1}
             max={100}
             step={1}
@@ -122,7 +122,7 @@ class ActorsProperties extends Component {
         <h1 id="label">Kolor:</h1>
         <div id="colorPicker">
             <ChromePicker
-            color={ this.state.color }
+            color={ this.props.parameters[5] }
             onChangeComplete={ this.handleColorChange }
         />
         </div>

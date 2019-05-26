@@ -24,6 +24,7 @@ class Navigation extends Component {
         this.props.handleNavIndexChange("actors");
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters("actors",0);
     }
 
     selectOperations = () =>{
@@ -31,6 +32,7 @@ class Navigation extends Component {
         this.props.handleNavIndexChange("operations");
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters("operations",0);
     }
 
     selectScenario = () =>{
@@ -38,17 +40,19 @@ class Navigation extends Component {
         this.props.handleNavIndexChange("scenario");
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters("scenario",0);
     }
 
     handleActorSelect = (idx) => {
         this.setState({selectedItemIndex: idx});
         this.props.updateSelectedItemIndex(idx);
+        this.props.selectParameters(this.state.navIndex,idx);
     }
 
     addActor = () => {
         this.setState({
             actorsList: this.state.actorsList.concat("Actor" + (this.state.actorCount + 1).toString())
-        }, ()=> this.props.updateActorsList(this.state.actorsList));
+        }, ()=> this.props.updateActorsList(this.state.actorsList,-1));
         var tempCount = this.state.actorCount;
         this.setState({actorCount: tempCount + 1});
     }
@@ -58,15 +62,16 @@ class Navigation extends Component {
         actorsList.splice(idx, 1);
 
         this.setState({actorsList: actorsList},
-            ()=> this.props.updateActorsList(this.state.actorsList));
+            ()=> this.props.updateActorsList(this.state.actorsList,idx));
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters(this.state.navIndex,0);
     }
 
     addOperation = () => {
         this.setState({
             operationsList: this.state.operationsList.concat("Operation" + (this.state.operationsCount + 1).toString())
-        }, ()=> this.props.updateOperationsList(this.state.operationsList));
+        }, ()=> this.props.updateOperationsList(this.state.operationsList,-1));
 
         var tempCount = this.state.operationsCount;
         this.setState({operationsCount: tempCount + 1});
@@ -77,16 +82,17 @@ class Navigation extends Component {
         operationsList.splice(idx, 1);
 
         this.setState({operationsList: operationsList},
-            ()=> this.props.updateOperationsList(this.state.operationsList));
+            ()=> this.props.updateOperationsList(this.state.operationsList,idx));
 
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters(this.state.navIndex,0);
     }
 
     addScenario = () => {
         this.setState({
             scenarioList: this.state.scenarioList.concat("Scenario" + (this.state.scenarioCount + 1).toString())
-        }, ()=> this.props.updateScenarioList(this.state.scenarioList));
+        }, ()=> this.props.updateScenarioList(this.state.scenarioList,-1));
 
         var tempCount = this.state.scenarioCount;
         this.setState({scenarioCount: tempCount + 1});
@@ -97,10 +103,11 @@ class Navigation extends Component {
         scenarioList.splice(idx, 1);
 
         this.setState({scenarioList: scenarioList},
-            ()=> this.props.updateScenarioList(this.state.scenarioList));
+            ()=> this.props.updateScenarioList(this.state.scenarioList,idx));
 
         this.setState({selectedItemIndex: 0});
         this.props.updateSelectedItemIndex(0);
+        this.props.selectParameters(this.state.navIndex,0);
     }
 
     render() {

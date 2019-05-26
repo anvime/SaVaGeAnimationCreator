@@ -67,37 +67,37 @@ class ScenarioProperties extends Component {
     constructor(props){
         super(props);
         this.state = {
-            durationTime: 2,
-            startAfter: 0,
-            numOfRepeats: 20,
-            repeatDelay: 0,
-            selectedActors: [],
-            selectedOperations: []
+            durationTime: this.props.parameters[0],
+            startAfter: this.props.parameters[1],
+            numOfRepeats: this.props.parameters[2],
+            repeatDelay: this.props.parameters[3],
+            selectedActors: this.props.parameters[4],
+            selectedOperations: this.props.parameters[5]
         };
     }
 
     handleDurationTimeChange = (event, durationTime) => {
-    this.setState({ durationTime });
+        this.props.handleScenarioDurationTimeChange(durationTime);
   };
 
     handleStartAfterChange = (event, startAfter) => {
-    this.setState({ startAfter });
+        this.props.handleScenarioStartAfterChange(startAfter);
   };
 
     handleNumOfRepeatsChange = (event, numOfRepeats) => {
-    this.setState({ numOfRepeats });
+        this.props.handleScenarioNumOfRepeatsChange(numOfRepeats);
   };
 
     handleRepeatDelayChange = (event, repeatDelay) => {
-    this.setState({ repeatDelay });
+        this.props.handleScenarioRepeatDelayChange(repeatDelay);
   };
 
     handleSelectedActorsChange = event => {
-    this.setState({ selectedActors: event.target.value });
+        this.props.handleScenarioSelectedActorsChange(event.target.value);
   };
 
     handleSelectedOperationsChange = event => {
-    this.setState({ selectedOperations: event.target.value });
+        this.props.handleScenarioSelectedOperationsChange(event.target.value);
   };
 
     render() {
@@ -109,10 +109,10 @@ class ScenarioProperties extends Component {
 
           <div id={"scenarioContent"}>
             <div>
-            <Typography id="label"><h1>Czas trwania (s): {this.state.durationTime}</h1></Typography>
+            <Typography id="label"><h1>Czas trwania (s): {this.props.parameters[0]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.durationTime}
+            value={this.props.parameters[0]}
             min={0}
             max={20}
             step={1}
@@ -121,10 +121,10 @@ class ScenarioProperties extends Component {
             </div>
 
             <div>
-            <Typography id="label"><h1>Rozpocznij po (s): {this.state.startAfter}</h1></Typography>
+            <Typography id="label"><h1>Rozpocznij po (s): {this.props.parameters[1]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.startAfter}
+            value={this.props.parameters[1]}
             min={0}
             max={20}
             step={1}
@@ -137,7 +137,7 @@ class ScenarioProperties extends Component {
             <InputLabel htmlFor="select-multiple-chip">Aktorzy:</InputLabel>
             <Select
                 multiple
-                value={this.state.selectedActors}
+                value={this.props.parameters[4]}
                 onChange={this.handleSelectedActorsChange}
                 input={<Input id="select-multiple-chip" />}
                 renderValue={selected => (
@@ -163,7 +163,7 @@ class ScenarioProperties extends Component {
             <InputLabel htmlFor="select-multiple-chip">Operacje:</InputLabel>
             <Select
                 multiple
-                value={this.state.selectedOperations}
+                value={this.props.parameters[5]}
                 onChange={this.handleSelectedOperationsChange}
                 input={<Input id="select-multiple-chip" />}
                 renderValue={selected => (
@@ -185,10 +185,10 @@ class ScenarioProperties extends Component {
         </div>
 
             <div>
-            <Typography id="label"><h1>Liczba powtórzeń: {this.state.numOfRepeats}</h1></Typography>
+            <Typography id="label"><h1>Liczba powtórzeń: {this.props.parameters[2]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.numOfRepeats}
+            value={this.props.parameters[2]}
             min={0}
             max={30}
             step={1}
@@ -197,10 +197,10 @@ class ScenarioProperties extends Component {
             </div>
 
             <div>
-            <Typography id="label"><h1>Opóźnienie wykonania powtórzenia (s): {this.state.repeatDelay}</h1></Typography>
+            <Typography id="label"><h1>Opóźnienie wykonania powtórzenia (s): {this.props.parameters[3]}</h1></Typography>
             <Slider
             id="sliders"
-            value={this.state.repeatDelay}
+            value={this.props.parameters[3]}
             min={0}
             max={20}
             step={1}
