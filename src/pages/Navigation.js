@@ -10,7 +10,7 @@ class Navigation extends Component {
             open: false,
             navIndex: this.props.navIndex,
             actorsList: ["Actor1", "Actor2", "Actor3"],
-            operationsList: ["Rotate1", "Rotate2", "Move1"],
+            operationsList: ["Operation1", "Operation2", "Operation3"],
             scenarioList: ["Scenario1"],
             selectedItemIndex: 0, //indeks odpowiada actorsList lub operationsList lub scenarioList w zależności od wartości navIndex
             actorCount: 3,

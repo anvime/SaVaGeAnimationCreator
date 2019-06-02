@@ -74,7 +74,7 @@ class OperationsProperties extends Component {
             <Slider
             id="sliders"
             value={this.props.parameters[5]}
-            min={1}
+            min={0}
             max={360}
             step={1}
             onChange={this.handleLinePathAngleChange}

@@ -57,7 +57,7 @@ class ActorsProperties extends Component {
             id="sliders"
             value={this.props.parameters[1]}
             min={1}
-            max={100}
+            max={500}
             step={1}
             onChange={this.handleDiameterChange}
             />
@@ -69,7 +69,7 @@ class ActorsProperties extends Component {
             id="sliders"
             value={this.props.parameters[2]}
             min={1}
-            max={100}
+            max={500}
             step={1}
             onChange={this.handleSquareSizeChange}
             />
@@ -103,7 +103,7 @@ class ActorsProperties extends Component {
             id="sliders"
             value={this.props.parameters[3]}
             min={1}
-            max={100}
+            max={500}
             step={1}
             onChange={this.handlePositionXChange}
             />
@@ -114,7 +114,7 @@ class ActorsProperties extends Component {
             id="sliders"
             value={this.props.parameters[4]}
             min={1}
-            max={100}
+            max={500}
             step={1}
             onChange={this.handlePositionYChange}
             />
