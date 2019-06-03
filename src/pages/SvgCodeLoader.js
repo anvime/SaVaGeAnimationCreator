@@ -82,16 +82,16 @@ class SvgCodeLoader extends Component {
     render() {
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                <Button id="codeLoaderButton1" variant="outlined"  onClick={this.handleClickOpen}>
                     Prześlij kod pliku SVG
                 </Button>
                 <div className="upload-btn-wrapper">
-                    <Button variant="outlined" color="primary" >
+                    <Button id="codeLoaderButton2" variant="outlined"  >
                         Prześlij  plik SVG
                     </Button>
                 <input type="file" id="fileToLoad" onInput={this.placeFileContent}/>
-                <Button variant="outlined" color="primary" onClick={this.handleSave} >
-                    Zapisz obecny plik(nie działa)
+                <Button id="codeLoaderButton3" variant="outlined"  onClick={this.handleSave} >
+                    Zapisz obecny plik
                 </Button>
                 </div>
                 <Dialog

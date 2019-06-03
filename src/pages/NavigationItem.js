@@ -21,7 +21,7 @@ class NavigationItem extends Component {
 
     return (
         <div className={colorClass}>
-            <div  onClick={() => this.props.clickFunction(this.state.index)}>{this.props.name}</div>
+            <div  id="navItemTitle" onClick={() => this.props.clickFunction(this.state.index)}>{this.props.name}</div>
             <Button className="deleteButton" onClick={() => this.props.deleteFunction(this.state.index)}>Usuń</Button>
         </div>
     );

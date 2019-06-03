@@ -102,6 +102,13 @@ class ScenarioProperties extends Component {
 
     render() {
     const { classes } = this.props;
+    let repetNum;
+
+    if(this.props.parameters[2] < 30){
+        repetNum = this.props.parameters[2].toString();
+    } else {
+        repetNum = "nieskończona";
+    }
 
     return (
       <div id="parametersSetting">
@@ -185,7 +192,7 @@ class ScenarioProperties extends Component {
         </div>
 
             <div>
-            <Typography id="label"><h1>Liczba powtórzeń: {this.props.parameters[2]}</h1></Typography>
+            <Typography id="label"><h1>Liczba powtórzeń: {repetNum}</h1></Typography>
             <Slider
             id="sliders"
             value={this.props.parameters[2]}

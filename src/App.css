@@ -10,7 +10,7 @@
 
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #647694;
   min-height: 100vh;
 }
 
@@ -49,3 +49,37 @@
   opacity: 0;
 }
 
+#saveToProgrammButton{
+    margin-top: 10px;
+    margin-right: 30px;
+    background: #42516b;
+}
+
+#loadFromProgrammButton{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+#updateSvgButton{
+    margin-top: 10px;
+    margin-right: 30px;
+    background: #42516b;
+}
+
+#deleteSvgButton{
+    margin-top: 10px;
+    background: #42516b;
+}
+
+#codeLoaderButton1{
+    background: #42516b;
+}
+
+#codeLoaderButton2{
+    background: #42516b;
+    margin-right: 15px;
+}
+
+#codeLoaderButton3{
+    background: #42516b;
+}

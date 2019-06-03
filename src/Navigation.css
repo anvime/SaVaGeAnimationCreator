@@ -31,9 +31,13 @@
   position:relative;
   background: lavenderblush;
   overflow:hidden;
-  min-height: calc(100vh);
+  min-height: calc(105.5vh);
 }
 
 #selectCategory {
     background:#c7aaaa;
+}
+
+#navItemTitle {
+    margin-bottom: 10px;
 }

@@ -11,12 +11,14 @@ import Navigation from "./pages/Navigation.js"
 import ActorsProperties from "./pages/ActorsProperties.js"
 import OperationsProperties from "./pages/OperationsProperties.js"
 import ScenarioProperties from "./pages/ScenarioProperties.js"
+import SaveIntoProgramm from "./pages/SaveIntoProgramm.js"
 
 class App extends Component {
 
     constructor(props){
         super(props);
         this.state = {
+            nameOfSvg: "PrzykładSvg",
             svgCode:'',
             svgActorsCode: '',
             svgOperationsAndScenariosCode: '',
@@ -486,10 +488,14 @@ class App extends Component {
                     let xlinearTranslation;
                     let ylinearTranslation;
                     let timeOfBegginings = '';
+                    let timeOfBegginings2 = '';
                     let currOperationIndex=this.state.operationsList.indexOf(this.state.scenarioParameters[i][5][k]);
                     let currActorIndex=this.state.actorsList.indexOf(this.state.scenarioParameters[i][4][j]);
                     let typeOfX;
                     let typeOfY;
+                    let scenarioOperationId1 = "scenarioOperation1"+  this.state.actorsList[currActorIndex] + this.state.operationsList[currOperationIndex];
+                    let scenarioOperationId2 = "scenarioOperation2"+  this.state.actorsList[currActorIndex] + this.state.operationsList[currOperationIndex];
+
 
                     if(this.state.actorsParameters[currActorIndex][0] == 'circle'){
                         typeOfX = "cx";
@@ -500,15 +506,25 @@ class App extends Component {
                     }
 
                     timeOfBegginings += this.state.scenarioParameters[i][1].toString() + "s;";
+                    timeOfBegginings2 += this.state.scenarioParameters[i][1].toString() + "s;";
+                    if(this.state.scenarioParameters[i][2] < 30){
                         for(let m=1; m<this.state.scenarioParameters[i][2] ;m++){
                             timeOfBegginings += (this.state.scenarioParameters[i][1] + m*(this.state.scenarioParameters[i][3] + this.state.scenarioParameters[i][0])).toString() + "s;";
+                            timeOfBegginings2 += (this.state.scenarioParameters[i][1] + m*(this.state.scenarioParameters[i][3] + this.state.scenarioParameters[i][0])).toString() + "s;";
                         }
+                    } else {
+                        timeOfBegginings += scenarioOperationId1 + ".end+" + this.state.scenarioParameters[i][3].toString() + "s";
+                        timeOfBegginings2 += scenarioOperationId2 + ".end+" + this.state.scenarioParameters[i][3].toString() + "s";
+                    }
+
+
 
                     if(this.state.operationsParameters[currOperationIndex][0]=="translation" && this.state.operationsParameters[currOperationIndex][1] =="line"){
                         ylinearTranslation = (this.state.actorsParameters[currActorIndex][4] + this.state.operationsParameters[currOperationIndex][4] * Math.sin(this.state.operationsParameters[currOperationIndex][5]*Math.PI/180)).toString();
                         xlinearTranslation = (this.state.actorsParameters[currActorIndex][3] + this.state.operationsParameters[currOperationIndex][4] * Math.cos(this.state.operationsParameters[currOperationIndex][5]*Math.PI/180)).toString();
 
-                        svgString += "<animate \n" + "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
+                        svgString += "<animate \n" + "           id=\"" + scenarioOperationId1 + "\"\n"  +
+                            "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
                             "           attributeName=\"" + typeOfX + "\" \n" +
                             "           from=\"" + this.state.actorsParameters[currActorIndex][3] + "\"\n" +
                             "           to=\"" + xlinearTranslation + "\" \n" +
@@ -517,12 +533,13 @@ class App extends Component {
                             "           fill=\"freeze\" \n" +
                             "           /> \n";
 
-                        svgString += "<animate \n" + "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
+                        svgString += "<animate \n" + "           id=\"" + scenarioOperationId2 + "\"\n"  +
+                            "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
                             "           attributeName=\"" + typeOfY + "\" \n" +
                             "           from=\"" + this.state.actorsParameters[currActorIndex][4] + "\"\n" +
                             "           to=\"" + ylinearTranslation + "\" \n" +
                             "           dur=\"" + this.state.scenarioParameters[i][0].toString() + "s\"\n" +
-                            "           begin=\"" + timeOfBegginings + "\"\n" +
+                            "           begin=\"" + timeOfBegginings2 + "\"\n" +
                             "           fill=\"freeze\" \n" +
                             "           /> \n";
 
@@ -548,7 +565,8 @@ class App extends Component {
                             (-2*this.state.operationsParameters[currOperationIndex][3]).toString() + ",0\n" + "\n" +
                             "        \"/>";
 
-                        svgString += "<animateMotion  \n" + "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
+                        svgString += "<animateMotion  \n" + "           id=\"" + scenarioOperationId1 + "\"\n"  +
+                        "           xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\"\n" +
                         "           dur=\"" + this.state.scenarioParameters[i][0].toString() + "s\"\n" +
                         "           begin=\"" + timeOfBegginings + "\"\n" +
                         "           fill=\"freeze\"> \n" + "\n" + "    <mpath xlink:href=\"#" + motionPathId + "\" />" +
@@ -574,13 +592,14 @@ class App extends Component {
                         }
 
                         svgString += "<animateTransform xlink:href=\"#" + this.state.scenarioParameters[i][4][j] + "\" \n" +
-                            "                          attributeName=\"transform\"\n" +
-                            "                          attributeType=\"XML\"\n" +
-                            "                          type=\"rotate\"\n" +
-                            "                          from=\"0 " + centerString + "\"\n" +
-                            "                          to=\"" + direction + centerString + "\"\n" +
-                            "                          dur=\"" + this.state.scenarioParameters[i][0].toString() + "s\"\n" +
-                            "                          begin=\"" + timeOfBegginings +"\"/>";
+                            "           id=\"" + scenarioOperationId1 + "\"\n"  +
+                            "           attributeName=\"transform\"\n" +
+                            "           attributeType=\"XML\"\n" +
+                            "           type=\"rotate\"\n" +
+                            "           from=\"0 " + centerString + "\"\n" +
+                            "           to=\"" + direction + centerString + "\"\n" +
+                            "           dur=\"" + this.state.scenarioParameters[i][0].toString() + "s\"\n" +
+                            "           begin=\"" + timeOfBegginings +"\"/>";
 
                     }
 
@@ -589,6 +608,24 @@ class App extends Component {
         }
         this.setState({
             svgOperationsAndScenariosCode: svgString}, () => this.joinSvgCode());
+
+    }
+
+    //Koniec tworzenia kodu SVG
+
+    //Wczytywanie danych kodu svg
+    loadSvgData = (actList, opList, scenList, actParam, opParam, scenParam) => {
+
+        this.setState({navIndex: "actors",
+        selectedItemIndex: 0,
+        actorsList: actList,
+        operationsList: opList,
+        scenarioList: scenList,
+        actorsParameters: actParam,
+        operationsParameters: opParam,
+        scenarioParameters: scenParam,
+        name: actList[0],
+        selectedParameters: actParam[0]}, () => {this.buildSvg()});
 
     }
 
@@ -614,9 +651,10 @@ class App extends Component {
               </Grid>
               <Grid item xs={6}>
         <div className="mainPage">
-            <SvgCodeLoader loadSvg={this.handleSvgChange}/>
+            <SaveIntoProgramm loadSvgData={this.loadSvgData} actorsList={this.state.actorsList} operationsList={this.state.operationsList} scenarioList={this.state.scenarioList} actorsParameters={this.state.actorsParameters} operationsParameters={this.state.operationsParameters} scenarioParameters={this.state.scenarioParameters} />
             <SvgView svg={this.state.svgCode}/>
-        </div>
+            <SvgCodeLoader loadSvg={this.handleSvgChange}/>
+            </div>
               </Grid>
           </Grid>
       </div>

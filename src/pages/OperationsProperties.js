@@ -64,7 +64,7 @@ class OperationsProperties extends Component {
             id="sliders"
             value={this.props.parameters[4]}
             min={1}
-            max={100}
+            max={500}
             step={1}
             onChange={this.handleLinePathDistanceChange}
             />
